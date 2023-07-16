@@ -12,7 +12,7 @@ app/**/*.js.map
 # dependencies
 node_modules/
 bower_components/
-
+.angular/cache/angular-webpack/75af45d8127f912ab05662103508ba76dcbaa66a
 # IDEs and editors
 .idea/
 .angular-webpack
@@ -25,7 +25,7 @@ npm-debug.log
 testem.log
 typings/
 .angular/
-
+0.pack
 # e2e
 e2e/*.js
 e2e/*.map
