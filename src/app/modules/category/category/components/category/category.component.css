@@ -1,0 +1,24 @@
+.aliner {
+
+    text-align: center;
+    margin-top: 20;
+
+}
+table {
+    border-collapse: collapse;
+    width: 100%;
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+.suchFeld{
+border-radius: 10%;
+background-color: rgb(195, 227, 227);
+width: 20%;
+}
+mat-form-field{
+    width: 100%;
+}
+.mat-cell:nth-child(1),
+.mat-header-cell:nth-child(1) {
+  flex: 0 0 6%;
+}
