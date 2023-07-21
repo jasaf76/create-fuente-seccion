@@ -1,0 +1,9 @@
+<h1 mat-dialog-title>Verifizieren</h1>
+<div mat-dialog-content>
+    <p>bist du sicher, dass du diese Kategorie löschen willst</p>
+</div>
+<div mat-dialog-actions>
+    <button mat-button  (click)="onNoClick()">Nein</button>
+    <button mat-button (click)="delete()" cdkFocusInitial>Ja</button>
+</div>
+

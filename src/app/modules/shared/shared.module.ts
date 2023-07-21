@@ -7,9 +7,12 @@ import { RouterModule } from '@angular/router';
 
 
 
+
 @NgModule({
   declarations: [
-    SidenavComponent
+    SidenavComponent,
+    SharedModule
+    
   ],
   exports: [
     SidenavComponent

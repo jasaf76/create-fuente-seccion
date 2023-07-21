@@ -4,6 +4,7 @@ import { MatTableDataSource } from '@angular/material/table';
 import { MatDialog } from '@angular/material/dialog';
 import { NewCategoryComponent } from '../../../components/new-category/new-category.component';
 import { MatSnackBar, MatSnackBarRef, SimpleSnackBar } from '@angular/material/snack-bar';
+import { ConfirmComponent } from 'src/app/modules/shared/components/confirm/confirm.component';
 
 @Component({
     selector: 'app-category',
@@ -67,6 +68,37 @@ export class CategoryComponent implements OnInit {
             duration: 2000,
         });
     }
+    edit(id: number, name: string, description: string) {
+        // implementation goes here
+        const dialogRef = this.dialog.open(NewCategoryComponent, {
+            data: { id, name, description }
+
+        });
+        return dialogRef.afterClosed().subscribe((result: any) => {
+            console.log('The dialog was closed', result);
+            if (result == 1) {
+                this.openSnackBar("Kategorie wurde erfolgreich aktualisiert", "Gespeichert");
+            } else if (result == 2) {
+                this.openSnackBar("Kategorie wurde nicht aktualisiert", "Failed");
+            }
+        });
+    }
+    delete(id: number) {
+        const dialogRef = this.dialog.open(ConfirmComponent, {
+            width: '450px',
+            data: { id }
+
+        });
+        return dialogRef.afterClosed().subscribe((result: any) => {
+            console.log('The dialog was closed', result);
+            if (result == 1) {
+                this.openSnackBar("Kategorie wurde erfolgreich gelöscht", "Gelöscht");
+            } else if (result == 2) {
+                this.openSnackBar("Kategorie wurde nicht aktualisiert", "Failed");
+            }
+        });
+    }
+
 
 }
 
