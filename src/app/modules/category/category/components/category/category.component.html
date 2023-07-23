@@ -6,7 +6,7 @@
         <div class="suchFeld">
             <mat-form-field hintLabel="in Kategorien suchen" appearance="fill">
                 <mat-label>Kategorien suchen</mat-label>
-                <input matInput placeholder="Suche">
+                <input matInput  #input (keyup)="suchen(input.value)">
             </mat-form-field>
         </div>
     </mat-card-header>
