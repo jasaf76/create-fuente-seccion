@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { ChangeDetectorRef, Component, OnInit, ViewChild } from '@angular/core';
 import { CategoryService } from '../../../../shared/services/category.service';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatDialog } from '@angular/material/dialog';
@@ -15,8 +15,7 @@ import { MatPaginator } from '@angular/material/paginator';
 export class CategoryComponent implements OnInit {
 
     constructor(private categoryService: CategoryService,
-        public dialog: MatDialog, private snackbar: MatSnackBar) { }
-
+        public dialog: MatDialog, private snackbar: MatSnackBar, private changeDetectorRef: ChangeDetectorRef) { }
     ngOnInit(): void {
         this.getCategories();
     }
@@ -32,7 +31,7 @@ export class CategoryComponent implements OnInit {
         this.categoryService.getCategories()
             .subscribe((data: any) => {
 
-                console.log("respuesta", data);
+                console.log("Antwort der API", data);
                 this.processCategoriesResponse(data);
             }, (error: any) => {
                 console.log("error", error);
@@ -63,6 +62,8 @@ export class CategoryComponent implements OnInit {
             console.log('The dialog was closed', result);
             if (result == 1) {
                 this.openSnackBar("Kategorie wurde erfolgreich erstellt", "Gespeichert");
+                this.getCategories(); 
+                this.changeDetectorRef.detectChanges();
             } else if (result == 2) {
                 this.openSnackBar("Kategorie wurde nicht erstellt", "Failed");
             }
@@ -84,6 +85,8 @@ export class CategoryComponent implements OnInit {
             console.log('The dialog was closed', result);
             if (result == 1) {
                 this.openSnackBar("Kategorie wurde erfolgreich aktualisiert", "Gespeichert");
+                this.getCategories();
+                this.changeDetectorRef.detectChanges();
             } else if (result == 2) {
                 this.openSnackBar("Kategorie wurde nicht aktualisiert", "Failed");
             }
@@ -107,21 +110,21 @@ export class CategoryComponent implements OnInit {
     suchen(term: string) {
         // Wenn der Suchbegriff leer ist, lade alle Kategorien
         if (term.length === 0) {
-         return this.getCategories();
+            return this.getCategories();
         } else {
-          this.categoryService.getCategoryById(term)
-            .subscribe(
-              (resp: any) => {
-                console.log("Antwort", resp);
-                this.processCategoriesResponse(resp);
-              },
-              (error: any) => {
-                console.log("Fehler", error);
-              }
-            );
+            this.categoryService.getCategoryById(term)
+                .subscribe(
+                    (resp: any) => {
+                        console.log("Antwort", resp);
+                        this.processCategoriesResponse(resp);
+                    },
+                    (error: any) => {
+                        console.log("Fehler", error);
+                    }
+                );
         }
-      }
-      
+    }
+   
 
 }
 
